@@ -18,30 +18,58 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void send(Mail theMail) {
-        SimpleMailMessage message = new SimpleMailMessage();
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setTo("dummybankprojectemail@gmail.com");
-        message.setSubject(theMail.subject);
-        message.setText(theMail.body + "\n\nFrom: " + theMail.email + "\n\nSent Date: " + theMail.sentDate);
-        javaMailSender.send(message);
+            message.setTo("dummybankprojectemail@gmail.com");
+            message.setSubject(theMail.subject);
+            message.setText(theMail.body + "\n\nFrom: " + theMail.email + "\n\nSent Date: " + theMail.sentDate);
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            System.out.println("----------------------------------------");
+            System.out.println("WARNING: Email sending failed. Logging content to console instead.");
+            System.out.println("To: dummybankprojectemail@gmail.com");
+            System.out.println("Subject: " + theMail.subject);
+            System.out.println("Body: " + theMail.body);
+            System.out.println("From: " + theMail.email);
+            System.out.println("----------------------------------------");
+        }
     }
 
     @Override
     public void transactionMail(String to, String subject, String body) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(body);
-        javaMailSender.send(message);
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(body);
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            System.out.println("----------------------------------------");
+            System.out.println("WARNING: Email sending failed. Logging content to console instead.");
+            System.out.println("To: " + to);
+            System.out.println("Subject: " + subject);
+            System.out.println("Body: " + body);
+            System.out.println("----------------------------------------");
+        }
     }
 
     @Override
     public void sendMail(String email, String link) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setText(link);
-        message.setSubject("Reset Password");
-        javaMailSender.send(message);
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(email);
+            message.setText(link);
+            message.setSubject("Reset Password");
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            System.out.println("----------------------------------------");
+            System.out.println("WARNING: Email sending failed. Logging content to console instead.");
+            System.out.println("To: " + email);
+            System.out.println("Subject: Reset Password");
+            System.out.println("Link/Body: " + link);
+            System.out.println("----------------------------------------");
+        }
 
     }
 

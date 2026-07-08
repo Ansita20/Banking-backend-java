@@ -115,7 +115,11 @@ const AuthPage = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Registration failed. Please try again.");
+      if (error.response?.status === 409) {
+        toast.error("This email is already registered!");
+      } else {
+        toast.error("Registration failed. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }

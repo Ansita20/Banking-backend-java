@@ -1,6 +1,18 @@
-import axios from "axios"
-const token = sessionStorage.getItem("jwtToken");
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-  export default axios;
+import axios from "axios";
 
-// import this token if you want it to be used with existing token except signupand login
+const axiosInstance = axios.create();
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = sessionStorage.getItem("jwtToken");
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;

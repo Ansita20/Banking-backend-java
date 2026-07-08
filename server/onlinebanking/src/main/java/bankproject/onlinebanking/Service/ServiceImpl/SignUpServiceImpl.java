@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 
@@ -41,20 +42,35 @@ public class SignUpServiceImpl implements SignUpService {
 
     }
 
+    @Transactional
     @Override
     public Optional<User> getAUser(String userId) {
-
-        Optional<User> user = userRepo.findById(userId);
-
-        return user;
+        Optional<User> userOpt = userRepo.findById(userId);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            if (user.getAccounts() != null) {
+                user.getAccounts().size();
+            }
+            if (user.getBeneficiaries() != null) {
+                user.getBeneficiaries().size();
+            }
+        }
+        return userOpt;
     }
 
+    @Transactional
     @Override
     public List<User> GetAllUsers() {
         System.out.println("++++++ insdi all user controller 2");
-        List<User> users = null;
-        System.out.println("++++++ insdi all user controller 2");
-        users = userRepo.findAll();
+        List<User> users = userRepo.findAll();
+        for (User user : users) {
+            if (user.getAccounts() != null) {
+                user.getAccounts().size();
+            }
+            if (user.getBeneficiaries() != null) {
+                user.getBeneficiaries().size();
+            }
+        }
         return users;
     }
 

@@ -13,7 +13,7 @@ import java.util.Map;
 import javax.transaction.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -90,7 +90,7 @@ public class AccountController {
     }
 
     @GetMapping("/accounts/mail")
-    public ResponseEntity<?> findAllAccounts(@Param(value = "") String email) {
+    public ResponseEntity<?> findAllAccounts(@RequestParam(value = "email") String email) {
 
         User user = signUpService.findByEmail(email);
         if (user != null)

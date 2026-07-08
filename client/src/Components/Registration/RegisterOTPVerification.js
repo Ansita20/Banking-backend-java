@@ -16,16 +16,28 @@ const RegisterOTPVerification = () => {
     const handleOtpVerificationRegister = async (e) => {
         e.preventDefault();
 
+        if (!otp) {
+            toast.error("Please enter the OTP");
+            return;
+        }
+
+        const trimmedOtp = otp.trim();
         const data = {
-            otp
+            otp: trimmedOtp
         };
-        const resp = await axios.post(`${BASE_URL}/api/v1/otp`, data);
-        console.log(resp);
-        if (resp.status === 200) {
-            toast.success("Email verified successfully! Please login!");
-            navigateTo("/auth");
-        } else {
-            toast.error("Error in verification!");
+
+        try {
+            const resp = await axios.post(`${BASE_URL}/api/v1/otp`, data);
+            console.log(resp);
+            if (resp.status === 200) {
+                toast.success("Email verified successfully! Please login!");
+                navigateTo("/auth");
+            } else {
+                toast.error("Error in verification!");
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("Invalid OTP code!");
         }
     };
 
