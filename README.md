@@ -33,9 +33,5 @@ This is a full-stack online banking web application.
 - **Transaction History:** View transaction history and statements.
 - **Admin Dashboard:** Admin panel to approve or reject account opening requests and manage users (block/unblock).
 
+https://github.com/user-attachments/assets/e3b2eecd-d1ee-4749-8348-7d3ca9b9aaeb
 
-
-https://github.com/user-attachments/assets/c4bdea7b-7f36-4d3f-bfcc-83343be4ecb2
-
-
-Uploading Screen Recording 2026-07-08 at 23.56.58.mov…
